@@ -19,7 +19,7 @@
             height: 100vh;
         }
         body{
-            background-color: white;
+            background-color: #ffffff;
         }
     </style>
     <title>Color Flipper</title>
@@ -36,18 +36,22 @@
         </nav>
     </div>
     <div class="d-flex w-100 flex-column align-items-center justify-content-center">
-            <h4>Background color: <span id="color">White</span></h4>
+            <h4>Background color: <span id="color">#ffffff</span></h4>
             <button class="btn btn-outline-dark mt-5" id="btn">Click Me!</button>
     </div>
     <script>
         const btn = document.getElementById("btn");
         const color = document.getElementById("color");
-        const colors = ["red","aliceblue","yellow","green","orange","blue","orangered","gray","brown","aqua"]
+        const hex = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"]
 
         btn.addEventListener("click",()=>{
-            const randomNum = Math.floor(Math.random()*colors.length);
-            document.body.style.backgroundColor = colors[randomNum];
-            color.innerText = colors[randomNum];
+            let hexcolor = "#"
+            for (let i=0;i<6;i++){
+                let randomNum = Math.floor(Math.random()*hex.length);
+                hexcolor += hex[randomNum]
+            }
+            document.body.style.backgroundColor = hexcolor;
+            color.innerText = hexcolor ;
         })
     </script>
   </body>
