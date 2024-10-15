@@ -42,11 +42,14 @@ btns.forEach(btn =>{
                    },10)
                 flag = 1;
                 e.currentTarget.innerText = "Stop";
+                btns[4].classList.replace("btn-outline-success","btn-outline-danger")
             }
         }
         else if(text == "Stop"){
             clearInterval(timer)
             flag = 0;
+            e.currentTarget.innerText = "Start"
+            btns[4].classList.replace("btn-outline-danger","btn-outline-success")
         }
         else if(text == "Reset"){
             clearInterval(timer)
