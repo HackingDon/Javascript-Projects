@@ -7,7 +7,6 @@ let count = 0;
 let millisec = 0;
 let seconds = 0;
 let minute = 0;
-let flag = 0;
 let timer ;
 btns.forEach(btn =>{
     btn.addEventListener("click",(e)=>{
@@ -19,7 +18,6 @@ btns.forEach(btn =>{
             count+=1;
         }
         else if(text == "Start"){
-            if(flag==0){
                 timer = setInterval(()=>{
                     millisec += 1;
                     millisec>9 ? msec.innerText = millisec : msec.innerText = "0" + millisec
@@ -43,17 +41,14 @@ btns.forEach(btn =>{
                 flag = 1;
                 e.currentTarget.innerText = "Stop";
                 btns[4].classList.replace("btn-outline-success","btn-outline-danger")
-            }
         }
         else if(text == "Stop"){
             clearInterval(timer)
-            flag = 0;
             e.currentTarget.innerText = "Start"
             btns[4].classList.replace("btn-outline-danger","btn-outline-success")
         }
         else if(text == "Reset"){
             clearInterval(timer)
-            flag = 0;
             seconds = 0;
             minute = 0;
             millisec = 0;
