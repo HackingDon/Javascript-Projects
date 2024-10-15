@@ -5,7 +5,7 @@ let sec = document.getElementById("sec");
 let msec = document.getElementById("msec")
 let count = 0;
 let millisec = 0;
-let seconds = 0;
+let second = 0;
 let minute = 0;
 let timer ;
 btns.forEach(btn =>{
@@ -23,19 +23,19 @@ btns.forEach(btn =>{
                     millisec>9 ? msec.innerText = millisec : msec.innerText = "0" + millisec
                     if (millisec>=100){
                         millisec = 0
-                        seconds += 1;
+                        second += 1;
                         millisec>9 ? msec.innerText = millisec : msec.innerText = "0" + millisec
-                        seconds>9 ? sec.innerText = seconds : sec.innerText = "0"+seconds
+                        second>9 ? sec.innerText = second : sec.innerText = "0"+second
                         minute>9 ? min.innerText = minute : min.innerText = "0"+minute
                     }
-                    if(seconds>=60){
-                        seconds = 0;
+                    if(second>=60){
+                        second = 0;
                         minute += 1
                         minute>9 ? min.innerText = minute : min.innerText = "0"+minute
-                        seconds>9 ? sec.innerText = seconds : sec.innerText = "0"+seconds
+                        second>9 ? sec.innerText = second : sec.innerText = "0"+second
                     }
                     else{
-                        seconds>9 ? sec.innerText = seconds : sec.innerText = "0"+seconds
+                        second>9 ? sec.innerText = second : sec.innerText = "0"+second
                     }
                    },10)
                 flag = 1;
@@ -49,7 +49,7 @@ btns.forEach(btn =>{
         }
         else if(text == "Reset"){
             clearInterval(timer)
-            seconds = 0;
+            second = 0;
             minute = 0;
             millisec = 0;
             msec.innerText = "00"
@@ -71,3 +71,22 @@ btns.forEach(btn =>{
         }
     })   
 })
+
+let hours = document.getElementById("hour");
+let minutes = document.getElementById("minute");
+let seconds = document.getElementById("seconds");
+
+setInterval(function(){
+    let time = new Date();
+    let th = time.getHours();
+    let tm = time.getMinutes();
+    let ts = time.getSeconds();
+    if(th>12){
+        th-12>9 ? hours.innerText = th-12 : hours.innerText = "0"+(th-12)
+    }
+    else{
+        th>9 ? hours.innerText = th : hours.innerText = "0"+(th) 
+    }
+    tm>9 ? minutes.innerText = tm : minutes.innerText = "0"+tm 
+    ts>9 ? seconds.innerText = ts : seconds.innerText = "0"+ts
+},1000)
