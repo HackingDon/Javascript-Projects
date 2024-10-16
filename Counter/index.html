@@ -35,7 +35,11 @@
             </div>
             <div class="d-flex flex-column align-items-center gap-4">
                 <h1>Digital Time</h1>
-                <h2><span id="hour">00</span>:<span id="minute">00</span>:<span id="seconds">00</span></h2>
+                <h2><span id="hour">00</span>:<span id="minute">00</span>:<span id="seconds">00</span> <span id="noon">AM</span></h2>
+                <div class="d-flex gap-4 align-items-center justify-content-between">
+                    <button class="btn btn-outline-dark" onclick="setUTC( )">UTC</button>
+                    <button class="btn btn-outline-dark" onclick="setLocal()">Local</button>
+                </div> 
             </div>
             <div class="d-flex align-items-center flex-column gap-4">
                 <h1>Timer</h1>
@@ -49,4 +53,4 @@
     </div>
     <script src="script.js"></script>
 </body>
-</html>
+</html> 

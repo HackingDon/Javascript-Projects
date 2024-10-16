@@ -40,12 +40,12 @@ btns.forEach(btn =>{
                    },10)
                 flag = 1;
                 e.currentTarget.innerText = "Stop";
-                btns[4].classList.replace("btn-outline-success","btn-outline-danger")
+                btns[6].classList.replace("btn-outline-success","btn-outline-danger")
         }
         else if(text == "Stop"){
             clearInterval(timer)
             e.currentTarget.innerText = "Start"
-            btns[4].classList.replace("btn-outline-danger","btn-outline-success")
+            btns[6].classList.replace("btn-outline-danger","btn-outline-success")
         }
         else if(text == "Reset"){
             clearInterval(timer)
@@ -71,22 +71,50 @@ btns.forEach(btn =>{
         }
     })   
 })
-
 let hours = document.getElementById("hour");
 let minutes = document.getElementById("minute");
 let seconds = document.getElementById("seconds");
-
-setInterval(function(){
-    let time = new Date();
-    let th = time.getHours();
-    let tm = time.getMinutes();
-    let ts = time.getSeconds();
-    if(th>12){
-        th-12>9 ? hours.innerText = th-12 : hours.innerText = "0"+(th-12)
-    }
-    else{
-        th>9 ? hours.innerText = th : hours.innerText = "0"+(th) 
-    }
-    tm>9 ? minutes.innerText = tm : minutes.innerText = "0"+tm 
-    ts>9 ? seconds.innerText = ts : seconds.innerText = "0"+ts
-},1000)
+let noon = document.getElementById("noon")
+let val = 0;
+let watchUtc;
+let watch ;
+function setLocal(){
+    clearInterval(watchUtc)
+    watch = setInterval(function(){
+        let time = new Date();
+        let th = time.getHours();
+        let tm = time.getMinutes();
+        let ts = time.getSeconds();
+        if(th>12){
+            th-12>9 ? hours.innerText = th-12 : hours.innerText = "0"+(th-12);
+            noon.innerText = "PM"
+        }
+        else{
+            th>9 ? hours.innerText = th : hours.innerText = "0"+(th) 
+            noon.innerText = "AM"
+        }
+        tm>9 ? minutes.innerText = tm : minutes.innerText = "0"+tm 
+        ts>9 ? seconds.innerText = ts : seconds.innerText = "0"+ts
+    },1000)
+} 
+function setUTC(){
+            clearInterval(watch);
+            watchUtc = setInterval(function(){
+            let time = new Date();
+            let th = time.getUTCHours();
+            let tm = time.getUTCMinutes();
+            let ts = time.getUTCSeconds();
+            if(th>12){
+                th-12>9 ? hours.innerText = th-12 : hours.innerText = "0"+(th-12)
+                noon.innerText = "PM"
+            }
+            else{
+                th>9 ? hours.innerText = th : hours.innerText = "0"+(th) 
+                noon.innerText = "AM"
+            }
+            tm>9 ? minutes.innerText = tm : minutes.innerText = "0"+tm 
+            ts>9 ? seconds.innerText = ts : seconds.innerText = "0"+ts
+        },1000);
+    
+}
+setLocal();
