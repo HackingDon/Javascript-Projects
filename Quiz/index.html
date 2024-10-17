@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+    <title>Quizz</title>
+</head>
+<style>
+    .ques-con{
+        height: 100vh;
+    }
+    .container{
+        background-color:antiquewhite;
+    }
+    ul{
+        list-style: none;
+    }
+</style>
+<body>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="d-flex flex-column ques-con justify-content-center align-items-center">
+                <h1 class="mb-5">Quizz</h1>
+                <div class="d-block" id="start">
+                    <button class="btn btn-lg btn-info" value="start">Start Quizz</button>
+                </div>
+                <div class="d-none" id="ques1">
+                    <p class="fs-3 fw-semibold">1. Which one of the following is not a prime number?</p>
+                    <ul >
+                        <li><input type="radio" class="me-3" name="ques1"></input><span class="fs-4">31</span></li>
+                        <li><input type="radio" class="me-3" name="ques1"></input><span class="fs-4">61</span></li>
+                        <li><input type="radio" class="me-3" name="ques1"></input><span class="fs-4">71</span></li>
+                        <li><input type="radio" class="me-3" name="ques1"></input><span class="fs-4">91</span></li>
+                    </ul>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-outline-success fw-bold ps-4 pe-4" value="next1">Next</button>
+                    </div>
+                    <span id="msg1" class="text-center text-success fs-4"></span>
+                </div>
+                <div class="d-none" id="ques2">
+                    <p class="fs-3 fw-semibold">2. What least number must be added to 1056, so that the sum is completely divisible by 23 ?</p>
+                    <ul >
+                        <li><input type="radio" class="me-3" name="ques2"></input><span class="fs-4">2</span></li>
+                        <li><input type="radio" class="me-3" name="ques2"></input><span class="fs-4">3</span></li>
+                        <li><input type="radio" class="me-3" name="ques2"></input><span class="fs-4">18</span></li>
+                        <li><input type="radio" class="me-3" name="ques2"></input><span class="fs-4">21</span></li>
+                    </ul>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-outline-success fw-bold ps-4 pe-4" value="next2">Next</button>
+                    </div>
+                    <span id="msg2"></span>
+                </div>
+                <div class="d-none" id="ques3">
+                    <p class="fs-3 fw-semibold">3. The largest 4 digit number exactly divisible by 88 is:</p>
+                    <ul >
+                        <li><input type="radio" class="me-3" name="ques3"></input><span class="fs-4">9944</span></li>
+                        <li><input type="radio" class="me-3" name="ques3"></input><span class="fs-4">9768</span></li>
+                        <li><input type="radio" class="me-3" name="ques3"></input><span class="fs-4">9988</span></li>
+                        <li><input type="radio" class="me-3" name="ques3"></input><span class="fs-4">8888</span></li>
+                    </ul>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-outline-success fw-bold ps-4 pe-4" value="next3">Finish</button>
+                    </div>
+                    <span id="msg3"></span>
+                </div>
+                <div class="d-none" id="ques4">
+                    <h1 id="score"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const btns = document.querySelectorAll(".btn");
+        const inputs = document.querySelectorAll("input")
+        const ques1 = document.getElementById("ques1");
+        const ques2 = document.getElementById("ques2");
+        const ques3 = document.getElementById("ques3");
+        const ques4 = document.getElementById("ques4");
+        const start = document.getElementById("start");
+        const msg1 = document.getElementById("msg1");
+        const msg2 = document.getElementById("msg2");
+        const msg3 = document.getElementById("msg3");
+        const answer = document.getElementById("score")
+        let score = 0;
+        btns.forEach(btn=>{
+            btn.addEventListener("click",(e)=>{
+                let value = e.currentTarget.value;
+                if(value=="start"){
+                    start.classList.replace("d-block","d-none");
+                    ques1.classList.replace("d-none","d-block");
+                }
+                else if(value=="next1"){
+                    ques1.classList.replace("d-block","d-none");
+                    ques2.classList.replace("d-none","d-block");  
+
+                }
+                else if(value == "next2"){
+                    ques2.classList.replace("d-block","d-none");
+                    ques3.classList.replace("d-none","d-block");
+                }
+                else{
+                    ques3.classList.replace("d-block","d-none");
+                    ques4.classList.replace("d-none","d-block");
+                    answer.innerText = "Your score is "+score;
+                }
+            })
+        })
+    inputs.forEach((input)=>{
+        input.addEventListener("click",(e)=>{
+            let name = e.currentTarget.name;
+            if(name=="ques1"){
+                inputs[0].disabled = true;
+                inputs[1].disabled = true;
+                inputs[2].disabled = true;
+                inputs[3].disabled = true;
+                if(inputs[3].checked){
+                msg1.innerText = "Correct"
+                score += 1;
+            }
+            else{
+                msg1.innerText = "Wrong"
+            }
+            }
+            if(name=="ques2"){
+                inputs[4].disabled = true;
+                inputs[5].disabled = true;
+                inputs[6].disabled = true;
+                inputs[7].disabled = true;
+                if(inputs[4].checked){
+                msg2.innerText = "Correct"
+                score += 1;
+            }
+            else{
+                msg2.innerText = "Wrong"
+            }
+            }
+            if(name=="ques3"){
+                inputs[8].disabled = true;
+                inputs[9].disabled = true;
+                inputs[10].disabled = true;
+                inputs[11].disabled = true;
+                if(inputs[8].checked){
+                msg3.innerText = "Correct"
+                score += 1;
+            }
+            else{
+                msg3.innerText = "Wrong"
+            }
+            }
+        })
+    })
+
+    </script>
+</body>
+</html>  
+</script>
+</body>
+</html>
