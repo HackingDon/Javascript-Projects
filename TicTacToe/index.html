@@ -86,74 +86,25 @@
         });
         function myfun(){
             if(btns[0].innerText == 'X' && btns[1].innerText == 'X' && btns[2].innerText == 'X' || btns[0].innerText == 'O' && btns[1].innerText == 'O' && btns[2].innerText == 'O'){
-                if(flag == 0){
-                    text.innerText = "X is a Winner";
-                    disable(btns);
-                }
-                else{
-                    text.innerText = "O is a Winner";
-                    disable(btns);
-                }
+                Showtext();
             }
             else if(btns[0].innerText == 'X' && btns[3].innerText == 'X' && btns[6].innerText == 'X' || btns[0].innerText == 'O' && btns[3].innerText == 'O' && btns[6].innerText == 'O'){
-                if(flag == 0){
-                    text.innerText = "X is a Winner";
-                    disable(btns);
-                }
-                else{
-                    text.innerText = "O is a Winner";
-                    disable(btns);
-                }
+                Showtext();
             }
             else if(btns[0].innerText == 'X' && btns[4].innerText == 'X' && btns[8].innerText == 'X' || btns[0].innerText == 'O' && btns[4].innerText == 'O' && btns[8].innerText == 'O'){
-                if(flag == 0){
-                    text.innerText = "X is a Winner";
-                    disable(btns);
-                }
-                else{
-                    text.innerText = "O is a Winner";
-                    disable(btns);
-                }
+                Showtext();
             }
             else if(btns[1].innerText == 'X' && btns[4].innerText == 'X' && btns[7].innerText == 'X' || btns[1].innerText == 'O' && btns[4].innerText == 'O' && btns[7].innerText == 'O'){
-                if(flag == 0){
-                    text.innerText = "X is a Winner";
-                    disable(btns);
-                }
-                else{
-                    text.innerText = "O is a Winner";
-                    disable(btns);
-                }
+                Showtext();
             }
             else if(btns[2].innerText == 'X' && btns[5].innerText == 'X' && btns[8].innerText == 'X' || btns[2].innerText == 'O' && btns[5].innerText == 'O' && btns[8].innerText == 'O'){
-                if(flag == 0){
-                    text.innerText = "X is a Winner";
-                    disable(btns);
-                }
-                else{
-                    text.innerText = "O is a Winner";
-                    disable(btns);
-                }
+                Showtext();
             }
             else if(btns[3].innerText == 'X' && btns[4].innerText == 'X' && btns[5].innerText == 'X' || btns[3].innerText == 'O' && btns[4].innerText == 'O' && btns[5].innerText == 'O'){
-                if(flag == 0){
-                    text.innerText = "X is a Winner";
-                    disable(btns);
-                }
-                else{
-                    text.innerText = "O is a Winner";
-                    disable(btns);
-                }
+                Showtext();
             }
             else if(btns[6].innerText == 'X' && btns[7].innerText == 'X' && btns[8].innerText == 'X' || btns[6].innerText == 'O' && btns[7].innerText == 'O' && btns[8].innerText == 'O'){
-                if(flag == 0){
-                    text.innerText = "X is a Winner";
-                    disable(btns);
-                }
-                else{
-                    text.innerText = "O is a Winner";
-                    disable(btns);
-                }
+               Showtext();
             }
             else if(btns[0].innerText&&btns[1].innerText&&btns[2].innerText&&btns[3].innerText&&btns[4].innerText&&btns[5].innerText&&btns[6].innerText&&btns[7].innerText&&btns[8].innerText != ""){
                 text.innerText = "Match Tied Please Restart the Match";
@@ -168,9 +119,22 @@
                 }
             }
         }
+        function Showtext(){
+            if(flag == 0){
+                    text.innerText = "X is a Winner";
+                    disable(btns);
+                }
+                else{
+                    text.innerText = "O is a Winner";
+                    disable(btns);
+                }
+        }
         function disable(button){
             Array.from(button).map((btn)=>{
-                btn.disabled = true;
+                if(btn!=button[9]){
+                    btn.disabled = true;
+                }
+                
             })
         }
         myfun();
