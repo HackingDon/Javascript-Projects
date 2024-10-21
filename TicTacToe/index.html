@@ -108,6 +108,9 @@
             else if(btns[6].innerText == 'X' && btns[7].innerText == 'X' && btns[8].innerText == 'X' || btns[6].innerText == 'O' && btns[7].innerText == 'O' && btns[8].innerText == 'O'){
                Showtext();
             }
+            else if(btns[2].innerText == 'X' && btns[4].innerText == 'X' && btns[6].innerText == 'X' || btns[2].innerText == 'O' && btns[4].innerText == 'O' && btns[6].innerText == 'O'){
+               Showtext();
+            }
             else if(btns[0].innerText&&btns[1].innerText&&btns[2].innerText&&btns[3].innerText&&btns[4].innerText&&btns[5].innerText&&btns[6].innerText&&btns[7].innerText&&btns[8].innerText != ""){
                 text.innerText = "Match Tied Please Restart the Match";
                 disable(btns);
