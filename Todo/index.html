@@ -40,42 +40,93 @@
         <div class="todo-input">
           <h1 class="text-center">Todo-List</h1>
           <form class="input-group" onsubmit="AddTodo(event)">
-            <input
-              type="text"
-              class="form-control"
-              id="input"
-              placeholder="Add Todo"
-              autocomplete="off"
-            />
-            <span class="input-group-text justify-content-center p-3" id="add"
-              >Add</span
-            >
+            <input type="text" class="form-control" id="input" placeholder="Add Todo" autocomplete="off"/>
+            <span class="input-group-text justify-content-center p-3" id="add">Add</span >
           </form>
         </div>
         <div class="d-flex w-100 justify-content-around mt-5">
-          <button class="btn btn-success" value="all" onclick="AddValue(event)">
-            All
-          </button>
-          <button
-            class="btn btn-success"
-            value="pending"
-            onclick="AddValue(event)"
-          >
-            Pending
-          </button>
-          <button
-            class="btn btn-success"
-            value="completed"
-            onclick="AddValue(event)"
-          >
-            Completed
-          </button>
+          <button class="btn btn-success" onclick="AddValue()"> All</button>
+          <button class="btn btn-success" onclick="AddValue('pending')">Pending</button>
+          <button class="btn btn-success" onclick="AddValue('completed')">Completed</button>
         </div>
-        <div class="container mt-5 p-5">
-          <ul id="todo"></ul>
+        <div class="container mt-5">
+          <ul id="todo" class="m-0 p-0"></ul>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script>
+      const todo = document.getElementById("todo");
+const input = document.getElementById("input");
+const add = document.getElementById("add");
+let array = JSON.parse(localStorage.getItem("list")) || [];
+window.onload = () => {
+  input.focus();
+  AddValue();
+};
+function AddValue(target= "all") {
+  todo.innerHTML = "";
+  for (let i = array.length - 1; i >= 0; i--) {
+    let li = document.createElement("li");
+    let input1 = document.createElement("input");
+    input1.setAttribute("type", "checkbox");
+    let span = document.createElement("span");
+    span.textContent = array[i].value;
+    if (array[i].completed) {
+      input1.checked = true;
+      span.style.textDecoration = "line-through";
+    }
+    let button = document.createElement("button");
+    button.setAttribute("class", "btn btn-outline-danger");
+    button.innerText = "del";
+    li.appendChild(input1);
+    li.appendChild(span);
+    li.appendChild(button);
+    if (target == "pending" && !array[i].completed) {
+      todo.appendChild(li);
+    } else if (target == "completed" && array[i].completed) {
+      todo.appendChild(li);
+    } else if (target == "all") {
+      todo.appendChild(li);
+    }
+    button.addEventListener("click", () => {
+      todo.removeChild(li);
+      array.splice(i, 1);
+      saveList(array)
+    });
+    input1.addEventListener("click", () => {
+      if (input1.checked) {
+        array[i].completed = true;
+        span.style.textDecoration = "line-through";
+        if (target == "pending") {
+          todo.removeChild(li);
+        }
+      } else {
+        array[i].completed = false;
+        span.style.textDecoration = "none";
+        if (target == "completed") {
+          todo.removeChild(li);
+        }
+      }
+      saveList(array);
+    });
+  }
+}
+function AddTodo(event) {
+  event.preventDefault();
+  if (input.value != "") {
+    let obj = {
+      value: input.value,
+      completed: false,
+    };
+    input.value = "";
+    array.push(obj);
+    saveList(array);
+    AddValue();
+  }
+}
+function saveList(value) {
+  localStorage.setItem("list", JSON.stringify(value));
+}
+    </script>
   </body>
 </html>
