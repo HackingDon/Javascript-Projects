@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <title>Image Slider</title>
+    <style>
+      img {
+        height: 100%;
+        width: 100%;
+      }
+      .slider {
+        position: relative;
+      }
+      button {
+        border-radius: 50%;
+        height: 15px;
+        width: 15px;
+        border: 1px solid gray;
+        transition: all 0.3s ease-in-out;
+      }
+      button:hover {
+        cursor: pointer;
+        transform: scale(1.5);
+      }
+      .slide.active {
+        position: absolute;
+        display: block;
+        height: 900px;
+        width: 100%;
+      }
+      button.active {
+        transform: scale(1.5);
+      }
+      .slide {
+        display: none;
+      }
+      .d-flex {
+        position: absolute;
+        top: 850px;
+        left: 1000px;
+        gap: 20px !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid m-0 p-0">
+      <div class="slider">
+        <div class="slide active"><img src="images/img1.jpg" alt="" /></div>
+        <div class="slide"><img src="images/img2.jpg" alt="" /></div>
+        <div class="slide"><img src="images/img3.jpg" alt="" /></div>
+        <div class="slide"><img src="images/img4.jpg" alt="" /></div>
+        <div class="slide"><img src="images/img5.jpg" alt="" /></div>
+        <div class="d-flex">
+          <button class="active"></button>
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      const btns = document.querySelectorAll("button");
+      let i = 1;
+      let prev;
+      let interval;
+      function start() {
+         interval = setInterval(() => {
+          if (i < slides.length) {
+            slider(i);
+            i++;
+          } else {
+            i = 0;
+          }
+        }, 3000);
+      }
+      function slider(n) {
+        if (n == 0) {
+            prev!= null ? slides[prev].classList.remove('active') : slides[slides.length - 1].classList.remove("active");
+            prev!= null ? btns[prev].classList.remove('active') : btns[btns.length - 1].classList.remove("active");
+        } else {
+          prev!= null ? slides[prev].classList.remove('active'): slides[n - 1].classList.remove("active");
+          prev!= null ? btns[prev].classList.remove('active'): btns[n - 1].classList.remove("active");
+        }
+        slides[n].classList.add("active");
+        btns[n].classList.add("active");
+        prev = n;
+      }
+      start();
+      btns.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          clearInterval(interval);
+          slider(index);
+          i = index + 1;
+          start();
+        });
+      });
+    </script>
+  </body>
+</html>
