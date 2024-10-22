@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+    <title>RockPaperScissor</title>
+</head>
+<style>
+    body{
+        background:linear-gradient(to right,#051d41,#a0bfec) ;
+        color: antiquewhite;
+    }
+</style>
+<body>
+    <div class="container-fluid">
+        <div class="container d-flex flex-column align-items-center justify-content-center">
+            <br>
+            <h1 class="text-center">Rock Paper Scissor</h1>
+            <br>
+            <div class="d-flex gap-3 w-50">
+                <span class="w-25">Computer Option</span><input type="text" class="form-control w-50" id="">
+            </div>
+            <br><br><br><br>
+            <div class="row w-50">
+                <div class="col-6 text-start">
+                    <h3>Your Point</h3>
+                    <p id="userpoint" class="ms-5 ps-2 fs-3">0</p>
+                </div>
+                <div class="col-6 text-start">
+                    <h3>Computer Point</h3>
+                    <p id="compoint" class="ms-5 ps-5 fs-3">0</p>
+                </div>
+            </div>
+            <br><br><br>
+            <div class="d-flex justify-content-center align-items-center flex-column w-50 me-5">
+                <h4 >Chances Left</h4>
+            <p id="chances" class="fs-3">10</p>
+            <h4 id="text">Start!</h4>
+            </div>
+            <br><br><br>
+            <div class="d-flex gap-3 w-50">
+                <span class="w-25">User Option</span><input type="text" class="form-control w-50" id="">
+            </div>
+            <br><br>
+            <div class="d-flex justify-content-between w-75">
+                <button class="btn btn-dark w-25">Rock</button>
+                <button class="btn btn-dark w-25">Paper</button>
+                <button class="btn btn-dark w-25">Scissor</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const inputs = document.querySelectorAll("input");
+        const btns = document.querySelectorAll("button")
+        const option = ["Rock","Paper","Scissor"];
+        let userpoint = document.getElementById("userpoint");
+        let compoint = document.getElementById("compoint");
+        let chance = document.getElementById("chances");
+        let text = document.getElementById("text")
+        let chances = 10;
+        let user = 0;
+        let bot = 0;
+        btns.forEach((btn)=>{
+            btn.addEventListener("click",()=>{
+                let Random = Math.floor(Math.random()*3);
+                inputs[0].value = option[Random]
+                inputs[1].value = btn.innerText;
+                if(chances > 0){
+                    if(inputs[0].value == "Rock" && inputs[1].value == "Scissor"){
+                    bot+=1
+                    compoint.innerText = bot;
+                    text.innerText = "Bot Got point"
+                }
+                else if(inputs[0].value == "Paper" && inputs[1].value == "Rock"){
+                    bot+=1
+                    compoint.innerText = bot;
+                    text.innerText = "Bot Got point"
+                }
+                else if(inputs[0].value == "Scissor" && inputs[1].value == "Paper"){
+                    bot+=1
+                    compoint.innerText = bot;
+                    text.innerText = "Bot Got point"
+                }
+                else if(inputs[0].value == "Paper" && inputs[1].value == "Scissor"){
+                    user+=1
+                    userpoint.innerText = user;
+                    text.innerText = "You Got point"
+                }
+                else if(inputs[0].value == "Rock" && inputs[1].value == "Paper"){
+                    user+=1
+                    userpoint.innerText = user;
+                    text.innerText = "You Got point"
+                }
+                else if(inputs[0].value == "Scissor" && inputs[1].value == "Rock"){
+                    user+=1
+                    userpoint.innerText = user;
+                    text.innerText = "You Got point"
+                }
+                else{
+                    text.innerText = "Match Tie"
+                }
+                chances -= 1;
+                chance.innerText = chances;
+                }
+                if(chances == 0){
+                    Array.from(btns).map(button =>{
+                        button.disabled = true;
+                    } )
+                    if(user>bot){
+                        text.innerText = "You Won"
+                    }
+                    else if(bot>user){
+                        text.innerText = "Bot Won"
+                    }
+                    else{
+                        text.innerText = "Match Tie"
+                    }
+                }  
+            })
+        })
+    </script>
+</body>
+</html>
