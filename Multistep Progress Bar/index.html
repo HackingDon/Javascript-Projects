@@ -24,8 +24,12 @@
             width: 50px;
             border-radius: 50%;
             background-color: grey;
+            color:azure;
             margin-top: 10px;
-            left: 50px;
+            left: 200px;
+        }
+        .circle.active{
+            background-color: green;
         }
         .hr{
             position: relative;
@@ -40,19 +44,66 @@
             top: 30px;
             left: 0;
         }
+        .hr.active::before{
+            background-color: green;
+        }
     </style>
     <title>Multi Step Progress Bar</title>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row w-100 h-25">
-            <div class="col-3 h-25 m-0 p-0"><span class="hr h-100 w-100">
-                <div class="circle"></div>
+    <div class="container-fluid p-0">
+        <div class="row w-100 h-25 m-0">
+            <div class="col-3 h-25 m-0 p-0"><span class="hr active h-100 w-100">
+                <div class="circle active d-flex align-items-center justify-content-center fs-3">1</div>
             </span></div>
-            <div class="col-3 h-25"></div>
-            <div class="col-3 h-25"></div>
-            <div class="col-3 h-25"></div>
+            <div class="col-3 h-25 m-0 p-0">
+                <span class="hr h-100 w-100">
+                    <div class="circle d-flex align-items-center justify-content-center fs-3">2</div>
+                </span>
+            </div>
+            <div class="col-3 h-25 m-0 p-0">
+                <span class="hr h-100 w-100">
+                    <div class="circle d-flex align-items-center justify-content-center fs-3">3</div>
+                </span>
+            </div>
+            <div class="col-3 h-25 m-0 p-0">
+                <span class="hr h-100 w-100">
+                    <div class="circle d-flex align-items-center justify-content-center fs-3">4</div>
+                </span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <button>Previous</button>
+            <button>Next</button>
         </div>
     </div>
+    <script>
+        const hr = document.querySelectorAll(".hr");
+        const circle = document.querySelectorAll(".circle");
+        const btns = document.querySelectorAll("button")
+        let i = 0;
+        btns[1].addEventListener("click",()=>{
+            if(i < hr.length-1){
+                console.log(i)
+            i+=1;
+            hr[i].classList.add("active");
+            circle[i].classList.add("active");
+            hr[i-1].classList.remove("active");
+            circle[i-1].classList.remove("active");
+            }
+           
+        })
+        btns[0].addEventListener("click",()=>{
+            if(i>0){
+                console.log(i)
+            i-=1;
+            hr[i].classList.add("active");
+            circle[i].classList.add("active");
+            hr[i+1].classList.remove("active");
+            circle[i+1].classList.remove("active");
+            }
+            
+        })
+    </script>
 </body>
 </html>
